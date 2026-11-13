@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+toolkit/UtilityHub/__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Downloads and temporary files
+downloads/
+temp/
+*.mp3
+*.mp4
+*.part
+
+# Local settings
+settings.json
+config.local.json
+
+# System files
+.DS_Store
+Thumbs.db
