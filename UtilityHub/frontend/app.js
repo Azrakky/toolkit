@@ -112,3 +112,29 @@ document.getElementById('converter-form').addEventListener('submit', async event
     if (button.disabled) polling = setInterval(refresh, 1000);
   } catch (error) { result.textContent = error.message; button.disabled = false; }
 });
+
+// Payment Plan Generator gadget (client-side, no backend changes required).
+(() => {
+  const list = document.getElementById('gadget-list');
+  if (!list || document.getElementById('payment-plan-gadget-card')) return;
+  const article = document.createElement('article');
+  article.id = 'payment-plan-gadget-card';
+  const title = document.createElement('h3');
+  title.textContent = 'Payment Plan Agreement Generator';
+  const description = document.createElement('p');
+  description.textContent = 'Create an installment schedule and print a resident payment agreement as PDF.';
+  const tag = document.createElement('span');
+  tag.className = 'tag';
+  tag.textContent = 'ready';
+  const button = document.createElement('button');
+  button.textContent = 'Open Payment Plan Generator';
+  button.addEventListener('click', () => window.open('/gadgets/payment-plan.html', '_blank', 'noopener'));
+  article.append(title, description, tag, button);
+  // initialize() fetches gadgets asynchronously and clears the list.
+  // Wait for its request to finish before inserting our standalone card.
+  const observer = new MutationObserver(() => {
+    if (!list.contains(article)) list.append(article);
+  });
+  observer.observe(list, {childList: true});
+  list.append(article);
+})();
