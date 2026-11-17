@@ -157,18 +157,33 @@ class Handler(SimpleHTTPRequestHandler):
         return self.respond(200, {"ok": True, "settings": settings})
 
 if __name__ == "__main__":
-    try:
-        server = ThreadingHTTPServer(("0.0.0.0", int(os.environ.get("PORT", PORT))), Handler)
-    except OSError as exc:
-        print(f"Unable to start UtilityHub on port {PORT}: {exc}", flush=True)
-        raise SystemExit(1)
-    print(f"UtilityHub v0.3 running at http://localhost:{PORT}", flush=True)
-    if not os.environ.get("RAILWAY_ENVIRONMENT"):
+    import os
 
-        threading.Timer(1, lambda: webbrowser.open(f"http://localhost:{PORT}")).start()
+    port = int(os.environ.get("PORT", 3000))
+
+    server = ThreadingHTTPServer(("0.0.0.0", port), Handler)
+
+    print(f"UtilityHub running on port {port}", flush=True)
+
     try:
         server.serve_forever()
     except KeyboardInterrupt:
         pass
     finally:
         server.server_close()
+# if __name__ == "__main__":
+#     try:
+#         server = ThreadingHTTPServer(("0.0.0.0", int(os.environ.get("PORT", PORT))), Handler)
+#     except OSError as exc:
+#         print(f"Unable to start UtilityHub on port {PORT}: {exc}", flush=True)
+#         raise SystemExit(1)
+#     print(f"UtilityHub v0.3 running at http://localhost:{PORT}", flush=True)
+#     if not os.environ.get("RAILWAY_ENVIRONMENT"):
+
+#         threading.Timer(1, lambda: webbrowser.open(f"http://localhost:{PORT}")).start()
+#     try:
+#         server.serve_forever()
+#     except KeyboardInterrupt:
+#         pass
+#     finally:
+#         server.server_close()
