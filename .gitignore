@@ -1,0 +1,20 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Python environments
+.venv/
+venv/
+
+# Private configuration
+.env
+.env.*
+!.env.example
+
+# Downloaded media
+downloads/
+temp/
+*.mp3
+*.mp4
+*.part
