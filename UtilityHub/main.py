@@ -4,6 +4,7 @@ import json, threading, webbrowser, subprocess, sys, shutil, re, uuid, time
 from urllib.parse import urlsplit
 from urllib.parse import urlparse
 
+# Constants and global variables
 BASE = Path(__file__).resolve().parent
 FRONTEND = BASE / "frontend"
 SETTINGS = BASE / "settings.json"
@@ -163,7 +164,8 @@ if __name__ == "__main__":
         raise SystemExit(1)
     print(f"UtilityHub v0.3 running at http://localhost:{PORT}", flush=True)
     if not os.environ.get("RAILWAY_ENVIRONMENT"):
-    threading.Timer(1, lambda: webbrowser.open(f"http://localhost:{PORT}")).start()
+
+        threading.Timer(1, lambda: webbrowser.open(f"http://localhost:{PORT}")).start()
     try:
         server.serve_forever()
     except KeyboardInterrupt:
